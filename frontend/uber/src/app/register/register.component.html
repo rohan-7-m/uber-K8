@@ -1,0 +1,22 @@
+<nav>
+    <ul>
+      <li><a routerLink="/book-cab">Book a Cab</a></li>
+      <li><a routerLink="/login">Login</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2>Register</h2>
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
+      </div>
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,55 @@
+<!-- <div class="container">
+    <h2>Book a Cab</h2>
+    <form (ngSubmit)="bookCab()" #bookCabForm="ngForm">
+      <div class="form-group">
+        <label for="pickupLocation">Pickup Location:</label>
+        <input type="text" id="pickupLocation" name="pickupLocation" [(ngModel)]="bookingData.pickupLocation" required>
+      </div>
+      <div class="form-group">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" [(ngModel)]="bookingData.destination" required>
+      </div>
+      <button type="submit" [disabled]="bookCabForm.invalid">Book Cab</button>
+    </form>
+  </div> -->
+  <nav>
+    <ul>
+      <!-- <li><a routerLink="/book-cab">Book a Cab</a></li> -->
+      <li><a routerLink="/login">Logout</a></li>
+    </ul>
+</nav>
+
+
+  <div class="container">
+    <h2>Book a Cab</h2>
+    <form (ngSubmit)="bookCab()" #bookCabForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="bookingData.name" required>
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" [(ngModel)]="bookingData.phoneNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="pickupLocation">Pickup Location:</label>
+        <input type="text" id="pickupLocation" name="pickupLocation" [(ngModel)]="bookingData.pickupLocation" required>
+      </div>
+      <div class="form-group">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" [(ngModel)]="bookingData.destination" required>
+      </div>
+      <div class="form-group">
+        <label for="vehicleType">Vehicle Type:</label>
+        <select id="vehicleType" name="vehicleType" [(ngModel)]="bookingData.vehicleType" required>
+          <option value="sedan">Sedan</option>
+          <option value="suv">SUV</option>
+          <option value="hatchback">Hatchback</option>
+          <option value="luxury">Luxury</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="bookCabForm.invalid">Book Cab</button>
+    </form>
+  </div>
+  
+  
