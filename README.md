@@ -2,7 +2,7 @@
 project to learn k8 and implement in uber 
 
 
-# uber-K8
+# SETUP minikube, mysql and golang server in local.
 
 project to learn k8 and implement in uber
 
@@ -60,3 +60,63 @@ go run .
 #run using docker image in local
 docker build -t uber .  
 docker run -p 8080:8080 uber
+
+
+---
+
+# create 2 Docker containers backend go server and mySql db . And establish communication between them.
+
+
+
+To run MySQL and your Golang server in separate Docker containers and have them communicate with each other. This is a more common and recommended approach for containerized applications, as it allows for better isolation and scalability. You can use Docker Compose to manage both containers in a multi-container environment.
+
+Here's a basic outline of how to set up your MySQL and Golang containers in separate containers and have them communicate:
+
+1. **Create a Docker Compose File**:
+   Create a `docker-compose.yml` file in your project directory. This file will define the services (containers) and their configurations. Here's an example:
+
+   ```yaml
+   version: '3'
+
+   services:
+     mysql:
+       image: mysql:latest
+       environment:
+         MYSQL_ROOT_PASSWORD: your-root-password
+         MYSQL_DATABASE: your-database-name
+
+     golang-app:
+       build:
+         context: .
+       ports:
+         - "8080:8080"
+       depends_on:
+         - mysql
+   ```
+
+   Replace `your-root-password` and `your-database-name` with your desired MySQL root password and database name.
+
+2. **Update Your Golang Code**:
+   Make sure your Golang application is configured to connect to the MySQL database using the hostname `mysql`, which corresponds to the service name you defined in the Docker Compose file. For example:
+
+   ```go
+   dataSourceName := "username:password@tcp(mysql:3306)/your-database-name"
+   db, err := sql.Open("mysql", dataSourceName)
+   ```
+
+   The `mysql` hostname is used to resolve the IP address of the MySQL container in the same Docker Compose network.
+
+3. **Build and Run the Docker Containers**:
+   Run the following command to build and start both the MySQL and Golang containers:
+
+   ```bash
+   docker-compose up
+   ```
+
+   This command will start both containers and configure them to communicate with each other. The MySQL container is accessible as `mysql` from the Golang container.
+
+Now, your Golang server and MySQL server run in separate containers, but they can communicate through the Docker Compose network. The Golang server can connect to the MySQL database using the service name `mysql`. This setup provides better isolation and flexibility for scaling and managing your application components.
+
+
+
+
